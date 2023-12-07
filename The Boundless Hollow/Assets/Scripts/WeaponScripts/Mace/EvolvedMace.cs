@@ -23,12 +23,12 @@ public class EvolvedMace : Projectile
         {
             hits++;
             float rand = Random.value;
-            float dmg = player.damage;
+            float dmgMultiplier = player.damage;
             bool crit = false;
-            if (rand <= player.critPercent) { dmg += (1 + player.critDamage) * dmg; crit = true; }
+            if (rand <= player.critPercent) { damage += (1 + player.critDamage) * damage; crit = true; }
             
-            if (crit) { collision.GetComponent<Enemy>().TakeDamage(dmg, Color.white); }
-            else { collision.GetComponent<Enemy>().TakeDamage(dmg,Color.red); }
+            if (crit) { collision.GetComponent<Enemy>().TakeDamage(damage * dmgMultiplier, Color.white); }
+            else { collision.GetComponent<Enemy>().TakeDamage(damage * dmgMultiplier, Color.red); }
             collision.GetComponent<Enemy>().TakeKnockback();
   
 

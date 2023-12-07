@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     public bool poisons;
     public bool electrocutes;
     public bool pulls;
+    public float damage;
 
     private void Awake()
     {
@@ -24,12 +25,13 @@ public class Projectile : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             float rand = Random.value;
-            float dmg = player.damage;
-            bool crit = false;
-            if (rand <= player.critPercent) { dmg += (1+player.critDamage) * dmg; crit = true; }
+            float dmgMultiplier = player.damage;
 
-            if (crit) { collision.GetComponent<Enemy>().TakeDamage(dmg, Color.white); }
-            else { collision.GetComponent<Enemy>().TakeDamage(dmg, Color.red); }
+            bool crit = false;
+            if (rand <= player.critPercent) { damage += (1+player.critDamage) * damage; crit = true; }
+
+            if (crit) { collision.GetComponent<Enemy>().TakeDamage(damage * dmgMultiplier, Color.white); }
+            else { collision.GetComponent<Enemy>().TakeDamage(damage * dmgMultiplier, Color.red); }
             collision.GetComponent<Enemy>().TakeKnockback();
 
             if (setsOnFire) 

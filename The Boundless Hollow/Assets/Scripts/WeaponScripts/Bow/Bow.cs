@@ -35,6 +35,7 @@ public class Bow : Weapon, LevelManager
             GameObject attack = Instantiate(projectile, new Vector2(pos.x + xoffset + lastInput.x * 2, pos.y + yoffset+ lastInput.y * 2), Quaternion.Euler(0, 0, deg-90));
             attack.gameObject.GetComponent<Arrow>().direction = lastInput;
             attack.gameObject.GetComponent<Arrow>().speed = projectileSpeed;
+            attack.gameObject.GetComponent<Arrow>().damage = damage;
             if (poision) { attack.gameObject.GetComponent<Arrow>().poisons = true; attack.gameObject.GetComponent<SpriteRenderer>().color = Color.magenta; }
 
             Destroy(attack, projectileDuration);
