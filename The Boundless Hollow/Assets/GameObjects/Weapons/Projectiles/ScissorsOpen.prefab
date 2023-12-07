@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  peircing: 1
+  peircing: 0
   setsOnFire: 0
   poisons: 0
   electrocutes: 0

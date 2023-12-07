@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponID: 0
-  evolveID: 7
+  evolveID: -1
   projectile: {fileID: 2931916943301717787, guid: 24345ea3bf0717e4a9e514a60479c6e9, type: 3}
-  damage: 10
   cooldown: 3
   size: 1
   projectileSpeed: 0

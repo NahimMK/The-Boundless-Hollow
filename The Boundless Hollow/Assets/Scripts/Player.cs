@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float curHealth;
     public float maxHealth;
+    public float healthChipSpeed;
     public float damage;
     public float speed;
     public float defense;
@@ -16,6 +18,16 @@ public class Player : MonoBehaviour
     public float critDamage;
     public float critPercent;
     public int Enemydefeated;
+
+    private float HPlerpTimer;
+    private float EXPlerpTimer;
+    private float delayTimer;
+
+    //UI Bars
+    [Header("UI")]
+    public Image Expbarfront;
+    public Image HPbarfront;
+    public Image HPbarback;
 
     //Weapons
     public List<int> curWeaponIDs;
@@ -45,6 +57,7 @@ public class Player : MonoBehaviour
         level = 1;
         maxHealth = 100;
         curHealth = maxHealth;
+        healthChipSpeed = 2f;
         curWeapons = new List<GameObject>();
         curWeaponIDs = new List<int>();
         GameObject starting = Instantiate(startingWeapon);
@@ -53,9 +66,15 @@ public class Player : MonoBehaviour
         curWeaponIDs.Add(starting.GetComponent<Weapon>().weaponID);
         Enemydefeated = 0;
 
+        //PlayerEXPUI
+        Expbarfront.fillAmount = exp / levelUp;
     }
-
-
+    private void Update()
+    {
+        UpdateXPUI();
+        curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
+        UpdateHPUI();
+    }
 
     //TODO: Death and Respawn Mechanics
     public void Die() { Debug.Log("You Died!"); }
@@ -64,25 +83,48 @@ public class Player : MonoBehaviour
     {
         if(collison.CompareTag("Enemy"))
         {
-
             float e_damage = collison.GetComponent<Enemy>().damage;
             TakeDamage(e_damage);
-
         }
-
-
     }
 
     public void TakeDamage(float enemyDamage)
     {
         //Uses armour with diminishing returns
         curHealth -= enemyDamage * (1 - defense / (defense + 200f));
-        if(curHealth <= 0) { Die(); }
+        HPlerpTimer = 0f;
+        if (curHealth <= 0) { Die(); }
     }
 
     public void Heal(float amount)
     {
         curHealth = Mathf.Min(curHealth + amount, maxHealth);
+        HPlerpTimer = 0f;
+    }
+
+    public void UpdateHPUI()
+    {
+        float HPFraction = curHealth / maxHealth;
+        float FHP = HPbarfront.fillAmount;
+        float BHP = HPbarback.fillAmount;
+        if (BHP > HPFraction)
+        {
+            HPbarfront.fillAmount = HPFraction;
+            HPbarback.color = Color.grey;
+            HPlerpTimer += Time.deltaTime;
+            float percentComplete = HPlerpTimer / healthChipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            HPbarback.fillAmount = Mathf.Lerp(BHP, HPFraction, percentComplete);
+        }
+        if (FHP < HPFraction)
+        {
+            HPbarback.fillAmount = HPFraction;
+            HPbarback.color = Color.green;
+            HPlerpTimer += Time.deltaTime;
+            float percentComplete = HPlerpTimer / healthChipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            HPbarfront.fillAmount = Mathf.Lerp(FHP, HPbarback.fillAmount, percentComplete);
+        }
     }
 
     //Uses a GameObject and Item ID system
@@ -175,6 +217,10 @@ public class Player : MonoBehaviour
         //Exp gain scales with expBonus
         exp += xp + xp * (expBonus / 100);
 
+        //ResetsTimer for Exp growth for UI
+        EXPlerpTimer = 0f;
+        delayTimer = 0f;
+
         //Leveling Up
         if (exp >= levelUp)
         {
@@ -210,4 +256,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void UpdateXPUI()
+    {
+        float expFraction = exp / levelUp;
+        float FXP = Expbarfront.fillAmount;
+        if (FXP < expFraction)
+        {
+            delayTimer += Time.deltaTime;
+            if (delayTimer > .5)
+            {
+                EXPlerpTimer += Time.deltaTime;
+                float percentComplete = EXPlerpTimer / 1;
+                Expbarfront.fillAmount = Mathf.Lerp(FXP, expFraction, percentComplete);
+            }
+        }
+    }
 }

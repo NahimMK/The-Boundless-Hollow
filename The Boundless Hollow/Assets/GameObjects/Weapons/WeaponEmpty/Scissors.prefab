@@ -45,18 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponID: 6
-  evolveID: 8
+  evolveID: 0
   projectile: {fileID: 4607337077234194402, guid: 2d7a9d5a9afe4924b94c42d1bfa05773, type: 3}
-  damage: 3
   cooldown: 5
   size: 1
   projectileSpeed: 0
-  projectileCount: 12
-  projectileDuration: 0.075
+  projectileCount: 10
+  projectileDuration: 0.05
   level: 1
   maxLevel: 9
   cooldownTimer: 0
   multiProjectileTimeDelay: 0.1
   player: {fileID: 0}
   spawner: {fileID: 0}
-  projectile2: {fileID: 2810546374036097132, guid: 9fcb19f642b63404eb434d83f0f61cc2, type: 3}

@@ -47,7 +47,6 @@ MonoBehaviour:
   weaponID: 4
   evolveID: -1
   projectile: {fileID: 4699688330131459149, guid: f6fcc813e5de2284eb7a1f837ec1e781, type: 3}
-  damage: 15
   cooldown: 1
   size: 1
   projectileSpeed: 20
