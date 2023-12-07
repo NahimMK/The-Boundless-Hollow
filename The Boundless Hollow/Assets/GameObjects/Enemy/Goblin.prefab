@@ -196,7 +196,7 @@ MonoBehaviour:
   health: 100
   baseHealth: 20
   damage: 5
-  speed: 5
+  speed: 3
   defense: 0
   level: 0
   Player: {fileID: 0}
@@ -207,6 +207,8 @@ MonoBehaviour:
   onFire: 0
   poisioned: 0
   freezing: 0
+  pulls: 0
   burnTicks: 0
   poisionTicks: 0
   freezeDuration: 0
+  pullDuration: 0
