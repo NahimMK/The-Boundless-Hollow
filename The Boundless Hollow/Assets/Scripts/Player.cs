@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float curHealth;
     public float maxHealth;
+    public float healthChipSpeed;
     public float damage;
     public float speed;
     public float defense;
@@ -16,6 +18,16 @@ public class Player : MonoBehaviour
     public float critDamage;
     public float critPercent;
     public int Enemydefeated;
+
+    private float HPlerpTimer;
+    private float EXPlerpTimer;
+    private float delayTimer;
+
+    //UI Bars
+    [Header("UI")]
+    public Image Expbarfront;
+    public Image HPbarfront;
+    public Image HPbarback;
 
     //Weapons
     public List<int> curWeaponIDs;
@@ -36,7 +48,7 @@ public class Player : MonoBehaviour
     //public List<Item> items; Removeing Item Levels and Item Cap for now
 
     private SpriteRenderer playerSprite;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +57,7 @@ public class Player : MonoBehaviour
         level = 1;
         maxHealth = 100;
         curHealth = maxHealth;
+        healthChipSpeed = 2f;
         curWeapons = new List<GameObject>();
         curWeaponIDs = new List<int>();
         GameObject starting = Instantiate(startingWeapon);
@@ -53,36 +66,65 @@ public class Player : MonoBehaviour
         curWeaponIDs.Add(starting.GetComponent<Weapon>().weaponID);
         Enemydefeated = 0;
 
+        //PlayerEXPUI
+        Expbarfront.fillAmount = exp / levelUp;
     }
-
-
+    private void Update()
+    {
+        UpdateXPUI();
+        curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
+        UpdateHPUI();
+    }
 
     //TODO: Death and Respawn Mechanics
     public void Die() { Debug.Log("You Died!"); }
 
     private void OnTriggerEnter2D(Collider2D collison)
     {
-        if(collison.CompareTag("Enemy"))
+        if (collison.CompareTag("Enemy"))
         {
-
             float e_damage = collison.GetComponent<Enemy>().damage;
             TakeDamage(e_damage);
-
         }
-
-
     }
 
     public void TakeDamage(float enemyDamage)
     {
         //Uses armour with diminishing returns
         curHealth -= enemyDamage * (1 - defense / (defense + 200f));
-        if(curHealth <= 0) { Die(); }
+        HPlerpTimer = 0f;
+        if (curHealth <= 0) { Die(); }
     }
 
     public void Heal(float amount)
     {
         curHealth = Mathf.Min(curHealth + amount, maxHealth);
+        HPlerpTimer = 0f;
+    }
+
+    public void UpdateHPUI()
+    {
+        float HPFraction = curHealth / maxHealth;
+        float FHP = HPbarfront.fillAmount;
+        float BHP = HPbarback.fillAmount;
+        if (BHP > HPFraction)
+        {
+            HPbarfront.fillAmount = HPFraction;
+            HPbarback.color = Color.grey;
+            HPlerpTimer += Time.deltaTime;
+            float percentComplete = HPlerpTimer / healthChipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            HPbarback.fillAmount = Mathf.Lerp(BHP, HPFraction, percentComplete);
+        }
+        if (FHP < HPFraction)
+        {
+            HPbarback.fillAmount = HPFraction;
+            HPbarback.color = Color.green;
+            HPlerpTimer += Time.deltaTime;
+            float percentComplete = HPlerpTimer / healthChipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            HPbarfront.fillAmount = Mathf.Lerp(FHP, HPbarback.fillAmount, percentComplete);
+        }
     }
 
     //Uses a GameObject and Item ID system
@@ -130,10 +172,11 @@ public class Player : MonoBehaviour
         //If the weapon that is picked up is not currently held, then create a new weapon
         //If it is already in inventory, level up the weapon
         bool hasWeapon = false;
-        for(int i = 0; i < curWeapons.Count; i++)
+        for (int i = 0; i < curWeapons.Count; i++)
         {
             Weapon weapon = curWeapons[i].GetComponent<Weapon>();
-            if (weapon.weaponID == ID){
+            if (weapon.weaponID == ID)
+            {
 
                 //If weapon can evolve, then evolve
                 if (weapon.level == weapon.maxLevel && weapon.evolveID != -1)
@@ -144,7 +187,7 @@ public class Player : MonoBehaviour
                     curWeaponIDs.Add(weapon.evolveID);
                     curWeaponIDs.Remove(weapon.weaponID);
                     Destroy(curWeapons[i]);
-                    curWeapons.Remove(curWeapons[i]); 
+                    curWeapons.Remove(curWeapons[i]);
                 }
                 //Weapon cannot evolve, level up the weapon
                 else
@@ -157,7 +200,7 @@ public class Player : MonoBehaviour
         }
 
         //Add new weapon to inventory if evolved version is not currently held
-        if (!hasWeapon && !curWeaponIDs.Contains(allWeapons[ID].GetComponent<Weapon>().evolveID)) 
+        if (!hasWeapon && !curWeaponIDs.Contains(allWeapons[ID].GetComponent<Weapon>().evolveID))
         {
             GameObject weapon = Instantiate(allWeapons[ID]);
             curWeapons.Add(weapon);
@@ -175,6 +218,10 @@ public class Player : MonoBehaviour
         //Exp gain scales with expBonus
         exp += xp + xp * (expBonus / 100);
 
+        //ResetsTimer for Exp growth for UI
+        EXPlerpTimer = 0f;
+        delayTimer = 0f;
+
         //Leveling Up
         if (exp >= levelUp)
         {
@@ -191,10 +238,10 @@ public class Player : MonoBehaviour
             //Stores Item/Weapon ID and true false for if it is an item or a weapon
             List<(int, bool)> choices = new List<(int, bool)>();
 
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 //Add Weapon to list
-                if (Random.Range(0f, 1f) > 0.5f){ choices.Add((possibleWeapons[Random.Range(0, possibleWeapons.Count)], false)); }
+                if (Random.Range(0f, 1f) > 0.5f) { choices.Add((possibleWeapons[Random.Range(0, possibleWeapons.Count)], false)); }
                 //Add Item to list
                 else { choices.Add((possibleItems[Random.Range(0, possibleItems.Count)], true)); }
             }
@@ -202,12 +249,27 @@ public class Player : MonoBehaviour
             //Pick one of the 3 choices and give it to the player
             //Need to change it so player can choose which upgrade they want
             (int, bool) choice = choices[Random.Range(0, 3)];
-            if (choice.Item2 == false){WeaponPickup(choice.Item1);}
-            else { ItemPickup(choice.Item1);}
+            if (choice.Item2 == false) { WeaponPickup(choice.Item1); }
+            else { ItemPickup(choice.Item1); }
 
-            for(int j = 0; j < 3; j++) { Debug.Log(choices[j].Item1 + " " + choices[j].Item2); }
+            for (int j = 0; j < 3; j++) { Debug.Log(choices[j].Item1 + " " + choices[j].Item2); }
             Debug.Log("Item ID: " + choice.Item1 + " Is Item: " + choice.Item2);
         }
     }
 
+    public void UpdateXPUI()
+    {
+        float expFraction = exp / levelUp;
+        float FXP = Expbarfront.fillAmount;
+        if (FXP < expFraction)
+        {
+            delayTimer += Time.deltaTime;
+            if (delayTimer > .5)
+            {
+                EXPlerpTimer += Time.deltaTime;
+                float percentComplete = EXPlerpTimer / 1;
+                Expbarfront.fillAmount = Mathf.Lerp(FXP, expFraction, percentComplete);
+            }
+        }
+    }
 }
