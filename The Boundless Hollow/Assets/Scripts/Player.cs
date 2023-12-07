@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     public List<int> curWeaponIDs;
     public List<GameObject> curWeapons;
     public List<GameObject> allWeapons;
-    public int startingWeaponID = new ChooseWeapon().returnWeaponID();
+    public int startingWeaponID;
 
     //Items
     public List<int> curItemIDs;
@@ -67,12 +67,13 @@ public class Player : MonoBehaviour
         healthChipSpeed = 2f;
         curWeapons = new List<GameObject>();
         curWeaponIDs = new List<int>();
-        WeaponPickup(startingWeaponID);
+        WeaponPickup(PlayerPrefs.GetInt("WeaponID"));
         Enemydefeated = 0;
         invincible = false;
         time = 0;
         //PlayerEXPUI
         Expbarfront.fillAmount = exp / levelUp;
+
     }
     private void Update()
     {

@@ -11,9 +11,12 @@ public class ChooseWeapon: MonoBehaviour
         {
             weaponID = 6;
         }
+        PlayerPrefs.SetInt("WeaponID", weaponID);
     }
 
-    public int returnWeaponID() { 
+    public int returnWeaponID() {
+        PlayerPrefs.SetInt("WeaponID", weaponID);
         return weaponID;
+        
     }
 }
