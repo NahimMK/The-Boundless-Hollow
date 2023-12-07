@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     public List<int> curWeaponIDs;
     public List<GameObject> curWeapons;
     public List<GameObject> allWeapons;
-    public GameObject startingWeapon;
+    public int startingWeaponID;
 
     //Items
     public List<int> curItemIDs;
@@ -64,10 +64,7 @@ public class Player : MonoBehaviour
         healthChipSpeed = 2f;
         curWeapons = new List<GameObject>();
         curWeaponIDs = new List<int>();
-        GameObject starting = Instantiate(startingWeapon);
-        starting.transform.SetParent(transform);
-        curWeapons.Add(starting);
-        curWeaponIDs.Add(starting.GetComponent<Weapon>().weaponID);
+        WeaponPickup(startingWeaponID);
         Enemydefeated = 0;
 
         //PlayerEXPUI
