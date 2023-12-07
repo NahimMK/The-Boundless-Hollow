@@ -234,6 +234,7 @@ public class Player : MonoBehaviour
         {
             level++;
             exp = Mathf.Max(levelUp - exp, 0); //Carryover exp
+            Expbarfront.fillAmount = exp / levelUp;
             curHealth = maxHealth * .6f;
 
             //Next Level scales
@@ -271,10 +272,10 @@ public class Player : MonoBehaviour
         if (FXP < expFraction)
         {
             delayTimer += Time.deltaTime;
-            if (delayTimer > .1f)
+            if (delayTimer > 1)
             {
                 EXPlerpTimer += Time.deltaTime;
-                float percentComplete = EXPlerpTimer / 1;
+                float percentComplete = EXPlerpTimer / 2;
                 Expbarfront.fillAmount = Mathf.Lerp(FXP, expFraction, percentComplete);
             }
         }
