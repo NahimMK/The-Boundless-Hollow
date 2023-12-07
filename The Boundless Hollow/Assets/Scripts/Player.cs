@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     public List<int> curWeaponIDs;
     public List<GameObject> curWeapons;
     public List<GameObject> allWeapons;
-    public int startingWeaponID;
+    public int startingWeaponID = new ChooseWeapon().returnWeaponID();
 
     //Items
     public List<int> curItemIDs;
