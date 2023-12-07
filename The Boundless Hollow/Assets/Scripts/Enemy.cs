@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour
     public GameObject damageText;
     public EnemySpawner spawner;
 
-
     public GameObject[] DropTable;
 
     //Debuffs
@@ -155,6 +154,8 @@ public class Enemy : MonoBehaviour
     public void Move(float moveSpeed)
     {
         Vector3 direction = (Player.transform.position - transform.position).normalized;
+        if(direction.x < 0) { sprite.flipX = true; }
+        else { sprite.flipX = false; }
         transform.Translate(moveSpeed * Time.deltaTime* direction);
     }
 
