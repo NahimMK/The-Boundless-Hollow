@@ -7,12 +7,36 @@ public class KabutoPellet : Pellet
     private int augment;
     private int maxBounces = 3;
     private int bounces = 0;
+    public Sprite normalPellet;
+    public Sprite flamingPellet;
+    public Sprite freezingPellet;
+    public Sprite poisonPellet;
 
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         ability = null;
         augment = Random.Range(0, 6);
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        switch (augment)
+        {
+            case 0: //Fire pellet
+                spriteRenderer.sprite = flamingPellet;
+                transform.localScale = new Vector2(3, 3);
+                break;
+            case 1: //Poision Pellet
+                spriteRenderer.sprite = poisonPellet;
+                transform.localScale = new Vector2(3, 3);
+                break;
+            case 4: //Freezing Pellet
+                spriteRenderer.sprite = freezingPellet;
+                transform.localScale = new Vector2(3, 3);
+                break;
+            default://Normal Bullet
+                spriteRenderer.sprite = normalPellet;
+                transform.localScale = new Vector2(3, 3);
+                break;
+        }
     }
 
     //Damage Enemies that are hit
