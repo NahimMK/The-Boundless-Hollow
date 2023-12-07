@@ -23,7 +23,9 @@ public class Player : MonoBehaviour
     private float HPlerpTimer;
     private float EXPlerpTimer;
     private float delayTimer;
-
+    private bool invincible;
+    private float invicibleTime;
+    private float time;
     //DeadMenu
     [SerializeField] GameObject DeadMenu;
 
@@ -66,7 +68,8 @@ public class Player : MonoBehaviour
         curWeaponIDs = new List<int>();
         WeaponPickup(startingWeaponID);
         Enemydefeated = 0;
-
+        invincible = false;
+        time = 0;
         //PlayerEXPUI
         Expbarfront.fillAmount = exp / levelUp;
     }
@@ -75,6 +78,15 @@ public class Player : MonoBehaviour
         UpdateXPUI();
         curHealth = Mathf.Clamp(curHealth, 0, maxHealth);
         UpdateHPUI();
+        if (invincible)
+        {
+            time += 1 * Time.deltaTime;
+            if (time > 1)
+            {
+                invincible = false;
+                time = 0;
+            }
+        }
     }
 
     //TODO: Death and Respawn Mechanics
@@ -85,7 +97,7 @@ public class Player : MonoBehaviour
         DeadMenu.SetActive(true);
     }
 
-    private void OnTriggerEnter2D(Collider2D collison)
+    private void OnTriggerStay2D(Collider2D collison)
     {
         if (collison.CompareTag("Enemy"))
         {
@@ -97,9 +109,13 @@ public class Player : MonoBehaviour
     public void TakeDamage(float enemyDamage)
     {
         //Uses armour with diminishing returns
-        curHealth -= enemyDamage * (1 - defense / (defense + 200f));
-        HPlerpTimer = 0f;
-        if (curHealth <= 0) { Die(); }
+        if (invincible == false)
+        {
+            curHealth -= enemyDamage * (1 - defense / (defense + 200f));
+            HPlerpTimer = 0f;
+            if (curHealth <= 0) { Die(); }
+            invincible = true;
+        }
     }
 
     public void Heal(float amount)
