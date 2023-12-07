@@ -18,10 +18,14 @@ public class EnemySpawner : MonoBehaviour
         gameTime += Time.deltaTime;
         spawnTimer += Time.deltaTime;
 
+        float spawnedtime = spawnRate / ((player.GetComponent<Player>().Enemydefeated / 100) + 1);
+        if(spawnedtime < 1)
+            spawnedtime = 1;
+
         //if the spawn timer has surpassed the spawn rate make a new enemy
-        if (enemies.Count < 150)
+        if (enemies.Count < 75)
         {
-            if (spawnTimer > spawnRate / ((player.GetComponent<Player>().Enemydefeated / 100) + 1))
+            if (spawnTimer > spawnedtime)
             {
                 spawnTimer = 0f;
                 int enemyNum = 0;
@@ -35,8 +39,8 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        //for every 100 enimies defeated spawn the boss
-        if (player.GetComponent<Player>().Enemydefeated > 100 * (BossesSpawned + 1))
+        //for every 300 enimies defeated spawn the boss
+        if (player.GetComponent<Player>().Enemydefeated > 300 * (BossesSpawned + 1))
         {
             BossesSpawned++;
             int enemyNum = 1;
