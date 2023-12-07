@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         switch (ID)
         {
             case 0: //Sword
-                damage += 10;
+                damage += 0.1f;
                 break;
             case 1: //Boots
                 speed += 1;
@@ -206,6 +206,7 @@ public class Player : MonoBehaviour
             curWeapons.Add(weapon);
             weapon.transform.SetParent(transform);
             curWeaponIDs.Add(ID);
+            
         }
 
     }

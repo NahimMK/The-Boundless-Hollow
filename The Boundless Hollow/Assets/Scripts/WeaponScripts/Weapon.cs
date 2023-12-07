@@ -35,6 +35,7 @@ public class Weapon : MonoBehaviour
         projectileCount += ((int)stats[3]);
         projectileDuration += stats[4];
         damage += stats[5];
+
     }
     
 }

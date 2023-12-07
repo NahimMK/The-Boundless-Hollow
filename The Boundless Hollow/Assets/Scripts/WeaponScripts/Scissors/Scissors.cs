@@ -36,12 +36,14 @@ public class Scissors : Weapon, LevelManager
             {
                 GameObject attack = Instantiate(projectile, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
                 attack.transform.localScale = new Vector3(size, size, 0);
+                attack.GetComponent<Projectile>().damage = damage;
                 StartCoroutine(FadeOut(attack));
             }
             else
             {
                 GameObject attack2 = Instantiate(projectile2, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
                 attack2.transform.localScale = new Vector3(size, size, 0);
+                attack2.GetComponent<Projectile>().damage = damage;
                 StartCoroutine(FadeOut(attack2));
             }
             yield return new WaitForSeconds(multiProjectileTimeDelay);

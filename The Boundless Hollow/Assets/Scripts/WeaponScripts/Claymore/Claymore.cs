@@ -28,6 +28,7 @@ public class Claymore : Weapon, LevelManager
             float deg = angle * Mathf.Rad2Deg;
             deg = (deg + 360) % 360;
             GameObject attack = Instantiate(projectile, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
+            attack.GetComponent<Projectile>().damage = damage;
             Destroy(attack, 1f);
             attack.transform.localScale = new Vector3(size, size, 0);
             StartCoroutine(FadeOut(attack));
@@ -76,7 +77,7 @@ public class Claymore : Weapon, LevelManager
                 stats = new List<float> { 0.1f, 0.1f, 0, 0, 0, 0 };
                 break;
             case 5:
-                stats = new List<float> { 0.1f, 0.1f, 0, 1, 0, 0 };
+                stats = new List<float> { 0.1f, 0.1f, 0, 1, 0, 10 };
                 break;
             case 6:
                 stats = new List<float> { 0.1f, 0.1f, 0, 0, 0, 0 };
@@ -85,7 +86,7 @@ public class Claymore : Weapon, LevelManager
                 stats = new List<float> { 0.2f, 0.2f, 0, 0, 0, 0 };
                 break;
             case 8:
-                stats = new List<float> { 0.2f, 0.2f, 0, 1, 0, 0 };
+                stats = new List<float> { 0.2f, 0.2f, 0, 1, 0, 10 };
                 break;
             default:
                 stats = new List<float> { 0,0,0,0,0 };

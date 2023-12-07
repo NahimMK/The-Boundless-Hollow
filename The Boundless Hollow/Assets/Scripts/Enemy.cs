@@ -130,10 +130,6 @@ public class Enemy : MonoBehaviour
 
         //Change color based on debuff or crit
         inside.color = color; inside.outlineColor = color;
-        //if (crit) { inside.color = Color.yellow; inside.outlineColor = Color.yellow; }
-        //else if (fire) { inside.color = new Color(1.0f, 0.5f, 0.0f); inside.outlineColor = new Color(1.0f, 0.5f, 0.0f); }
-        //else if (poison) { inside.color = Color.magenta; inside.outlineColor = Color.magenta; }
-        //else { inside.color = Color.red; inside.outlineColor = Color.red; }
 
         //Destroy damage text
         Destroy(txt, 1f);

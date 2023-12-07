@@ -33,7 +33,7 @@ public class Slingshot : Weapon, LevelManager
             GameObject attack = Instantiate(projectile, pos, Quaternion.identity);
             attack.gameObject.GetComponent<Pellet>().pos = (dir - pos).normalized;
             attack.gameObject.GetComponent<Pellet>().speed = projectileSpeed;
-
+            attack.GetComponent<Projectile>().damage = damage;
             Destroy(attack, projectileDuration);
         }
 
