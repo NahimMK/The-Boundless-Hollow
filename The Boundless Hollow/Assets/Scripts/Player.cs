@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class Player : MonoBehaviour
     private float HPlerpTimer;
     private float EXPlerpTimer;
     private float delayTimer;
+
+    //DeadMenu
+    [SerializeField] GameObject DeadMenu;
 
     //UI Bars
     [Header("UI")]
@@ -77,7 +81,12 @@ public class Player : MonoBehaviour
     }
 
     //TODO: Death and Respawn Mechanics
-    public void Die() { Debug.Log("You Died!"); }
+    public void Die() 
+    {
+        Time.timeScale = 0f;
+        AudioListener.pause = true;
+        DeadMenu.SetActive(true);
+    }
 
     private void OnTriggerEnter2D(Collider2D collison)
     {
