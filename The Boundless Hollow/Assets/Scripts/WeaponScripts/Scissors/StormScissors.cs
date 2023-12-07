@@ -47,7 +47,7 @@ public class StormScissors : Weapon
             {
                 GameObject attack = Instantiate(projectile, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
                 attack.transform.localScale = new Vector3(size, size, 0);
-                attack.GetComponent<Projectile>().damage = damage;
+                attack.GetComponentInChildren<Projectile>().damage = damage;
                 StartCoroutine(FadeOut(attack));
             }
             
