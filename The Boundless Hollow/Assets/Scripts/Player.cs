@@ -251,7 +251,8 @@ public class Player : MonoBehaviour
             level++;
             exp = Mathf.Max(levelUp - exp, 0); //Carryover exp
             Expbarfront.fillAmount = exp / levelUp;
-            curHealth = maxHealth * .6f;
+            if(curHealth < maxHealth * .6f)
+                curHealth = maxHealth * .6f;
 
             //Next Level scales
             //TODO: Figure out what formula and what numbers feel best
