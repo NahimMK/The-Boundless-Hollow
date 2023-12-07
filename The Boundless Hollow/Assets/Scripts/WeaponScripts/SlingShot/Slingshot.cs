@@ -45,7 +45,7 @@ public class Slingshot : Weapon, LevelManager
         GameObject closestEnemy = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach(GameObject enemy in spawner.spawnedEnimies)
+        foreach(GameObject enemy in spawner.spawnedEnemies)
         {
             if(enemy != null)
             {
