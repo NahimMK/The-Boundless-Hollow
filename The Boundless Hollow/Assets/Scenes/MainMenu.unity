@@ -445,11 +445,11 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Bow and Arrow
-      m_Image: {fileID: 0}
     - m_Text: Claymore
       m_Image: {fileID: 0}
     - m_Text: Mace
+      m_Image: {fileID: 0}
+    - m_Text: Bow and Arrow
       m_Image: {fileID: 0}
     - m_Text: Slingshot
       m_Image: {fileID: 0}
@@ -461,7 +461,7 @@ MonoBehaviour:
       - m_Target: {fileID: 108581498}
         m_TargetAssemblyTypeName: ChooseWeapon, Assembly-CSharp
         m_MethodName: WeaponChoose
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
