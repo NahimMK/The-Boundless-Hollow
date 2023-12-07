@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2236961840557987715
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7266582352004465040}
+  - component: {fileID: 7732900921039316620}
+  m_Layer: 0
+  m_Name: Scissors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7266582352004465040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236961840557987715}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.4116445, y: 3.1924646, z: -8.514908}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7732900921039316620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236961840557987715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc710c72082cefa47a3126d3057a9bae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponID: 6
+  evolveID: 8
+  projectile: {fileID: 4607337077234194402, guid: 2d7a9d5a9afe4924b94c42d1bfa05773, type: 3}
+  damage: 3
+  cooldown: 5
+  size: 1
+  projectileSpeed: 0
+  projectileCount: 12
+  projectileDuration: 0.075
+  level: 1
+  maxLevel: 9
+  cooldownTimer: 0
+  multiProjectileTimeDelay: 0.1
+  player: {fileID: 0}
+  spawner: {fileID: 0}
+  projectile2: {fileID: 2810546374036097132, guid: 9fcb19f642b63404eb434d83f0f61cc2, type: 3}
