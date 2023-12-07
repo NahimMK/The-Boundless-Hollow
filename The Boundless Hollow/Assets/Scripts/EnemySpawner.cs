@@ -9,9 +9,10 @@ public class EnemySpawner : MonoBehaviour
     public GameObject player;
     public List<GameObject> enemies;
     private float spawnTimer = 0f;
-    public List<GameObject> spawnedEnimies;
+    public List<GameObject> spawnedEnemies;
     public float gameTime;
     public int BossesSpawned;
+    public int total;
 
     void Update()
     {
@@ -22,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
         if(spawnedtime < 1)
             spawnedtime = 1;
 
+        total = spawnedEnemies.Count;
         //if the spawn timer has surpassed the spawn rate make a new enemy
         if (enemies.Count < 75)
         {
@@ -35,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
                 //get the vector for the enemy spawn
                 Vector2 spawnPos = new Vector2(player.transform.position.x + xpos[Random.Range(0, 2)], player.transform.position.y + ypos[Random.Range(0, 2)]);
                 //spawn the enemy
-                spawnedEnimies.Add(Instantiate(enemies[enemyNum], spawnPos, Quaternion.identity));
+                spawnedEnemies.Add(Instantiate(enemies[enemyNum], spawnPos, Quaternion.identity));
             }
         }
 
@@ -50,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
             //get the vector for the boss spawn
             Vector2 spawnPos = new Vector2(player.transform.position.x + xpos[Random.Range(0, 2)], player.transform.position.y + ypos[Random.Range(0, 2)]);
             //spawn the boss
-            spawnedEnimies.Add(Instantiate(enemies[enemyNum], spawnPos, Quaternion.identity));
+            spawnedEnemies.Add(Instantiate(enemies[enemyNum], spawnPos, Quaternion.identity));
 
         }
     }

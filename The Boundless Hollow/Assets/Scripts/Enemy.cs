@@ -141,7 +141,7 @@ public class Enemy : MonoBehaviour
 
     public void Ability() { }
 
-    public void Die() { DropItem(); Destroy(this.gameObject); } //spawner.spawnedEnimies.Remove(this.gameObject); }
+    public void Die() { DropItem(); spawner.spawnedEnemies.Remove(this.gameObject); Destroy(this.gameObject); } //spawner.spawnedEnimies.Remove(this.gameObject); }
 
     //Drops a random item in the enemy's DropTable
     //The drop table also allows for killed enemies to spawn more enimies
