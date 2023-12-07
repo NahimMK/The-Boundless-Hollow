@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
     public float curHealth;
@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     //public List<Item> items; Removeing Item Levels and Item Cap for now
 
     private SpriteRenderer playerSprite;
+    public TMPro.TextMeshProUGUI levelText;
 
     // Start is called before the first frame update
     void Start()
@@ -250,6 +251,7 @@ public class Player : MonoBehaviour
         if (exp >= levelUp)
         {
             level++;
+            levelText.text = "Level " + level;
             exp = Mathf.Max(levelUp - exp, 0); //Carryover exp
             Expbarfront.fillAmount = exp / levelUp;
             if(curHealth < maxHealth * .6f)

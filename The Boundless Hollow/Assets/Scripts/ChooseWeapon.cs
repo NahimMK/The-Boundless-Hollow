@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChooseWeapon
+public class ChooseWeapon: MonoBehaviour 
 {
     private static int weaponID;
     public void WeaponChoose(int ID) {
