@@ -76,7 +76,7 @@ public class Claymore : Weapon, LevelManager
                 stats = new List<float> { 0.1f, 0.1f, 0, 0, 0, 0 };
                 break;
             case 5:
-                stats = new List<float> { 0.1f, 0.1f, 0, 1, 0, 0 };
+                stats = new List<float> { 0.1f, 0.1f, 0, 1, 0, 10 };
                 break;
             case 6:
                 stats = new List<float> { 0.1f, 0.1f, 0, 0, 0, 0 };
@@ -85,7 +85,7 @@ public class Claymore : Weapon, LevelManager
                 stats = new List<float> { 0.2f, 0.2f, 0, 0, 0, 0 };
                 break;
             case 8:
-                stats = new List<float> { 0.2f, 0.2f, 0, 1, 0, 0 };
+                stats = new List<float> { 0.2f, 0.2f, 0, 1, 0, 10 };
                 break;
             default:
                 stats = new List<float> { 0,0,0,0,0 };

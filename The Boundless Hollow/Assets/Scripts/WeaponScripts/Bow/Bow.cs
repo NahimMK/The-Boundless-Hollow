@@ -55,31 +55,31 @@ public class Bow : Weapon, LevelManager
         switch (level)
         {
             case 1:
-                stats = new List<float> { 0, 0, 0, 1, 0 };
+                stats = new List<float> { 0, 0, 0, 1, 0, 0 };
                 break;
             case 2:
-                stats = new List<float> { 0, 0, 0, 1, 0 };
+                stats = new List<float> { 0, 0, 0, 1, 0, 0 };
                 break;
             case 3:
-                stats = new List<float> { 0, 0, 0, 1, 0 };
+                stats = new List<float> { 0, 0, 0, 1, 0, 0 };
                 break;
             case 4:
-                stats = new List<float> { 0, 0, 0, 1, 0 };
+                stats = new List<float> { 0, 0, 0, 1, 0, 0 };
                 break;
             case 5:
-                stats = new List<float> { 0.5f, 0, 0, 0, 0 };
+                stats = new List<float> { 0.5f, 0, 0, 0, 0, 5 };
                 break;
             case 6:
-                stats = new List<float> { 0, 0, 0, 1, 0 };
+                stats = new List<float> { 0, 0, 0, 1, 0, 0 };
                 break;
             case 7:
-                stats = new List<float> { 0, 0, 0, 1, 0 };
+                stats = new List<float> { 0, 0, 0, 1, 0, 0 };
                 break;
             case 8:
-                stats = new List<float> { 0.5f, 0, 0, 1, 0 };
+                stats = new List<float> { 0.5f, 0, 0, 1, 0, 0 };
                 break;
             default:
-                stats = new List<float> { 0, 0, 0, 0, 0 };
+                stats = new List<float> { 0, 0, 0, 0, 0, 5 };
                 break;
         }
 

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86a6c52c41cdb6644bd3598636dfbe04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponID: 0
+  weaponID: 8
   evolveID: -1
   projectile: {fileID: 4607337077234194402, guid: 2d7a9d5a9afe4924b94c42d1bfa05773, type: 3}
   damage: 15

@@ -80,7 +80,7 @@ public class Mace : Weapon, LevelManager
                 stats = new List<float> { 0, 0, 0.25f, 1, 0, 0 };
                 break;
             case 5:
-                stats = new List<float> { 0, 0, 0.25f, 0, 5 };
+                stats = new List<float> { 0, 0, 0.25f, 0,0, 5 };
                 break;
             case 6:
                 stats = new List<float> { 0, 0, 0.25f, 1, 0, 0 };
