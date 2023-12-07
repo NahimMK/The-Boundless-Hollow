@@ -19,17 +19,20 @@ public class EnemySpawner : MonoBehaviour
         spawnTimer += Time.deltaTime;
 
         //if the spawn timer has surpassed the spawn rate make a new enemy
-        if (spawnTimer > spawnRate)
+        if (enemies.Count < 150)
         {
-            spawnTimer = 0f;
-            int enemyNum = 0;
-            //Stops enemies from spawning on top of the player, and spawns them a random distance away from the player
-            float[] xpos = { Random.Range(-10f, -5f), Random.Range(5f, 10f) };
-            float[] ypos = { Random.Range(-10f, -5f), Random.Range(5f, 10f) };
-            //get the vector for the enemy spawn
-            Vector2 spawnPos = new Vector2(player.transform.position.x + xpos[Random.Range(0, 2)], player.transform.position.y + ypos[Random.Range(0, 2)]);
-            //spawn the enemy
-            spawnedEnimies.Add(Instantiate(enemies[enemyNum], spawnPos, Quaternion.identity));
+            if (spawnTimer > spawnRate / ((player.GetComponent<Player>().Enemydefeated / 100) + 1))
+            {
+                spawnTimer = 0f;
+                int enemyNum = 0;
+                //Stops enemies from spawning on top of the player, and spawns them a random distance away from the player
+                float[] xpos = { Random.Range(-10f, -5f), Random.Range(5f, 10f) };
+                float[] ypos = { Random.Range(-10f, -5f), Random.Range(5f, 10f) };
+                //get the vector for the enemy spawn
+                Vector2 spawnPos = new Vector2(player.transform.position.x + xpos[Random.Range(0, 2)], player.transform.position.y + ypos[Random.Range(0, 2)]);
+                //spawn the enemy
+                spawnedEnimies.Add(Instantiate(enemies[enemyNum], spawnPos, Quaternion.identity));
+            }
         }
 
         //for every 100 enimies defeated spawn the boss
