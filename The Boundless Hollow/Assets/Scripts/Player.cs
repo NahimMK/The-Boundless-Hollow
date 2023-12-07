@@ -243,7 +243,6 @@ public class Player : MonoBehaviour
             levelUp = Mathf.RoundToInt(50 * Mathf.Pow(level, 0.5f));//Exponential Formula
             //levelUp = 50 + (level - 1) * 0.5f;//Polynomial Formula
 
-            //TODO: Give stats or items or something to the player for leveling up
 
             //Stores Item/Weapon ID and true false for if it is an item or a weapon
             List<(int, bool)> choices = new List<(int, bool)>();
@@ -274,7 +273,7 @@ public class Player : MonoBehaviour
         if (FXP < expFraction)
         {
             delayTimer += Time.deltaTime;
-            if (delayTimer > .5)
+            if (delayTimer > .1f)
             {
                 EXPlerpTimer += Time.deltaTime;
                 float percentComplete = EXPlerpTimer / 1;

@@ -39,7 +39,7 @@ public class StormScissors : Weapon
                 GameObject attack3 = Instantiate(projectile3, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
                 attack3.gameObject.GetComponent<Arrow>().direction = lastInput;
                 attack3.gameObject.GetComponent<Arrow>().speed = projectileSpeed;
-                attack3.GetComponent<Projectile>().damage = damage;
+                attack3.GetComponentInChildren<Projectile>().damage = damage;
                 attack3.transform.localScale = new Vector3(size, size, 0);
                 Destroy(attack3, 6);
             }
@@ -47,7 +47,7 @@ public class StormScissors : Weapon
             {
                 GameObject attack = Instantiate(projectile, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
                 attack.transform.localScale = new Vector3(size, size, 0);
-                attack.GetComponent<Projectile>().damage = damage;
+                attack.GetComponentInChildren<Projectile>().damage = damage;
                 StartCoroutine(FadeOut(attack));
             }
             
@@ -55,7 +55,7 @@ public class StormScissors : Weapon
             {
                 GameObject attack2 = Instantiate(projectile2, new Vector2(pos.x + lastInput.x * 2, pos.y + lastInput.y * 2), Quaternion.Euler(0, 0, deg));
                 attack2.transform.localScale = new Vector3(size, size, 0);
-                attack2.GetComponent<Projectile>().damage = damage;
+                attack2.GetComponentInChildren<Projectile>().damage = damage;
                 StartCoroutine(FadeOut(attack2));
             }
             yield return new WaitForSeconds(multiProjectileTimeDelay);
