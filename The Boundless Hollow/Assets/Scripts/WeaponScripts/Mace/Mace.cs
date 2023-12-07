@@ -22,7 +22,7 @@ public class Mace : Weapon, LevelManager
             float y = Mathf.Sin(angle) * radius;
 
             mace.Add(Instantiate(projectile, new Vector2(player.transform.position.x + x, player.transform.position.y + y), Quaternion.identity));
-
+            //mace[i].GetComponent<Projectile>().damage = damage;
             trailRenderers.Add(mace[i].gameObject.AddComponent<TrailRenderer>());
             InitializeTrailRenderer(trailRenderers[i]);
         }
@@ -114,7 +114,7 @@ public class Mace : Weapon, LevelManager
                 float x = Mathf.Cos(angle) * radius;
                 float y = Mathf.Sin(angle) * radius;
                 mace[i].transform.position = new Vector3(player.transform.position.x + x, player.transform.position.y + y, 0);
-
+                //mace[i].GetComponent<Projectile>().damage = damage;
             }
         }
 
