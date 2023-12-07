@@ -13,10 +13,13 @@ public class Movement : MonoBehaviour
     public LayerMask walls;
 
     private Player player;
+    public Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {
         player = GetComponent<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -36,6 +39,9 @@ public class Movement : MonoBehaviour
                 targetPos.x += input.x;
                 targetPos.y += input.y;
 
+                if(input.x < 0) { spriteRenderer.flipX = true; }
+                else { spriteRenderer.flipX = false; }
+
                 if (CollisonCheck(targetPos))
                 {
                     StartCoroutine(Walk(targetPos));
@@ -46,6 +52,7 @@ public class Movement : MonoBehaviour
     IEnumerator Walk(Vector3 targetPos)
     {
         moving = true;
+        animator.SetBool("Moving", moving);
         while((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
@@ -53,6 +60,7 @@ public class Movement : MonoBehaviour
         }  
         transform.position = targetPos;
         moving = false;
+        animator.SetBool("Moving", moving);
     }
 
     private bool CollisonCheck(Vector3 targetPos)
