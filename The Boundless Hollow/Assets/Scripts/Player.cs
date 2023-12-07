@@ -210,6 +210,7 @@ public class Player : MonoBehaviour
                     curWeaponIDs.Remove(weapon.weaponID);
                     Destroy(curWeapons[i]);
                     curWeapons.Remove(curWeapons[i]);
+                    possibleWeapons.Remove(ID);
                 }
                 //Weapon cannot evolve, level up the weapon
                 else

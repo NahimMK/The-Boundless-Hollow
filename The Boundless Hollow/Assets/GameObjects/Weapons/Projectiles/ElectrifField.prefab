@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 852822540692409712}
   - component: {fileID: 5002329363428066463}
   - component: {fileID: 5872358440994314481}
+  - component: {fileID: -9110434867194759767}
   m_Layer: 0
   m_Name: ElectrifField
   m_TagString: Untagged
@@ -101,4 +102,41 @@ MonoBehaviour:
   peircing: 1
   setsOnFire: 0
   poisons: 0
-  electrocutes: 1
+  electrocutes: 0
+  pulls: 0
+  damage: 10
+--- !u!58 &-9110434867194759767
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132817199622677571}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997

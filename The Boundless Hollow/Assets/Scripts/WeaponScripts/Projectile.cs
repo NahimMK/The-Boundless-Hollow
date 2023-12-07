@@ -28,10 +28,11 @@ public class Projectile : MonoBehaviour
             float dmgMultiplier = player.damage;
 
             bool crit = false;
-            if (rand <= player.critPercent) { damage += (1+player.critDamage) * damage; crit = true; }
+            float damageDealt = damage;
+            if (rand <= player.critPercent) { damageDealt = damage + (1+player.critDamage) * damage; crit = true; }
 
-            if (crit) { collision.GetComponent<Enemy>().TakeDamage(damage * dmgMultiplier, Color.white); }
-            else { collision.GetComponent<Enemy>().TakeDamage(damage * dmgMultiplier, Color.red); }
+            if (crit) { collision.GetComponent<Enemy>().TakeDamage(damageDealt * dmgMultiplier, Color.white); }
+            else { collision.GetComponent<Enemy>().TakeDamage(damageDealt * dmgMultiplier, Color.red); }
             collision.GetComponent<Enemy>().TakeKnockback();
 
             if (setsOnFire) 

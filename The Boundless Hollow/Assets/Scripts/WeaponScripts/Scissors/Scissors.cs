@@ -85,7 +85,7 @@ public class Scissors : Weapon, LevelManager
         switch (level)
         {
             case 1:
-                stats = new List<float> { .5f, 0, 0, 0, 0 };
+                stats = new List<float> { .5f, 0, 0, 0, 0, 0 };
                 break;
             case 2:
                 stats = new List<float> { 0, 0.1f, 0, 0, 0, 3 };
