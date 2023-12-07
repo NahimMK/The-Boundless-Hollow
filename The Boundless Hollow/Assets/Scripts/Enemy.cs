@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         //Scale player enemy health based off game time and player level
         spawner = GameObject.Find("EnemyManager").GetComponent<EnemySpawner>();
         Player = GameObject.Find("Player");
-        health = baseHealth + spawner.gameTime * 0.5f * Player.GetComponent<Player>().level;
+        health = baseHealth + spawner.gameTime * 0.05f * Player.GetComponent<Player>().level;
         freezeSpeed = 0.1f * speed; //90% slow
         pullSpeed = -2;
     }
